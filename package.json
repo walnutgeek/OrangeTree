@@ -1,0 +1,35 @@
+{
+  "name": "OrangeTree",
+  "version": "0.0.4",
+  "description": "Utilities to accessing, modifying, and validating immutable objects in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node --autotest --verbose *.spec.js --watch *.js",
+    "cover": "istanbul cover --include-all-sources jasmine-node --verbose index.spec.js",
+    "travis": "npm run cover && codecov < ./coverage/coverage.json"
+  },
+  "files":["README.md","index.js"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walnutgeek/immutils.git"
+  },
+  "keywords": [
+    "immutable",
+    "javascript",
+    "json-pointer",
+    "schema",
+    "validation"
+  ],
+  "author": "walnutgeek",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/walnutgeek/immutils/issues"
+  },
+  "homepage": "https://github.com/walnutgeek/immutils#readme",
+  "devDependencies": {
+    "codecov": "^1.0.1",
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.5.2",
+    "jasmine-node": "^1.14.5"
+  }
+}
