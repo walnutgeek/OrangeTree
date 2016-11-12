@@ -26,5 +26,6 @@ created. This implementation make use of negative numbers to refer
 elements from the end of array. Such as `-1` means last element, `-2` -
 second from the end, and so forth ...
 
+
 See:
 [RFC 6901 - JavaScript Object Notation (JSON) Pointer - IETF Tools](https://tools.ietf.org/html/rfc6901)
