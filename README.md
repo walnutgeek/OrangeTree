@@ -10,10 +10,10 @@ Access, modify(copy-on-change) JavaScript object trees.
 Orange trees can have fruits and flowers at the same time. 
 OrangeTree project helps to modify object tree without mutation 
 of original input. API use plain objects and arrays to store data. 
-As modificaion applied to the tree API has to all clone tree nodes from 
+As modificaion applied to the tree, logic clones tree nodes from 
 point of change to root of the tree to hold new changes while preserving
-original state immutable. To avoid unnecessary copies, it keeps track 
-what nodes are already cloned in parallel tree structure.
+original input immutable. To avoid unnecessary copies, it keeps track 
+what nodes are already cloned in parallel `Shadow` tree structure.
 
 JSON Pointer is used to refer to particular location
 in object tree. Rather then mutate object tree, API
