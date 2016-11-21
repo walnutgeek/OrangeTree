@@ -40,7 +40,8 @@ describe("Shadow", function() {
     expect(ot.get('/x/-1')).toBe(2);
     expect(ot.value() === init ).toBe(true);
     expect(str(init) ).toBe(init_s);
-    ot.set('/x/-',1);
+    var path = ot.set('/x/-',1);
+    expect(path.toString() ).toBe('/x/2');
     expect(str(init) ).toBe(init_s);
     expect(ot.value() !== init ).toBe(true);
     expect(str(ot.value())).toBe('{"a":"a","x":[3,2,1]}');

@@ -29,3 +29,59 @@ second from the end, and so forth ...
 
 See:
 [RFC 6901 - JavaScript Object Notation (JSON) Pointer - IETF Tools](https://tools.ietf.org/html/rfc6901)
+
+## Use
+
+```
+> var Shadow = require('OrangeTree').Shadow ;
+
+> var init_state = { a: 'a', x: [3,2] } ;
+> var ot = new Shadow( init ) ;
+
+> ot.get('/x/-1') //last element in array 'x'
+  2
+
+> var path = ot.set('/x/-',1) // add element to end of array 'x'
+> path.toString() // absolute path to element that was added
+/x/2
+
+> ot.value()
+{"a":"a","x":[3,2,1]}
+
+```
+## Validations
+
+
+### Types
+
+#### Primitive 
+  * boolean
+  * number
+  * string
+  * date
+  * datetime
+  * timestamp
+  
+#### Containers
+  * array - assumes all elemnets of same types specified by `valueType`
+  * map - object where keys are string representation of `keyType` (via
+    `toString()`). values are all of `valueType`
+  * object - object structure defined by `fields` object that map 
+    
+### Complex Types
+  * Link
+  * WDF
+  
+### Constraints
+
+Constrant is function returning boolean with signature  
+`fn(value, shadow, abs_path)`
+
+#### Pre-defined constraints
+   * `maxLength(n)`
+   * `minLength(n)`
+   * `float(min,max)`
+   * `integer(min,max)`
+   
+
+
