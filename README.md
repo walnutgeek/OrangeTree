@@ -63,14 +63,14 @@ See:
   * timestamp
   
 #### Containers
-  * array - assumes all elemnets of same types specified by `valueType`
+  * array - assumes all elements of same types specified by `valueType`
   * map - object where keys are string representation of `keyType` (via
     `toString()`). values are all of `valueType`
   * object - object structure defined by `fields` object that map 
     
 ### Complex Types
-  * Link
-  * WDF
+  * link
+  * table
   
 ### Constraints
 
@@ -78,10 +78,13 @@ Constrant is function returning boolean with signature
 `fn(value, shadow, abs_path)`
 
 #### Pre-defined constraints
-   * `maxLength(n)`
-   * `minLength(n)`
-   * `float(min,max)`
-   * `integer(min,max)`
+   * `maxLength(sz)`
+   * `minLength(sz)`
+   * `float`
+   * `integer`
+   * `uint`
+   * `uint32`
+   * `max_value(v)`
    
 
 

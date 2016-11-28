@@ -1,4 +1,4 @@
-var otree = require('.');
+var otree = require('../');
 
 function jp(p) {
   return new otree.Path(p);
