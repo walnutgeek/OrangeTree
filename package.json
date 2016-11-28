@@ -8,7 +8,7 @@
     "cover": "istanbul cover --include-all-sources jasmine-node --verbose specs/*.spec.js",
     "karma": "karma start",
     "appveyor": "karma start ",
-    "travis": "npm run cover && codecov < ./coverage/coverage.json"
+    "travis": "karma start && npm run cover && codecov < ./coverage/coverage.json"
   },
   "files": [
     "README.md",
