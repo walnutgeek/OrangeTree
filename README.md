@@ -2,6 +2,7 @@
 Access, modify(copy-on-change) JavaScript object trees.
 
 [![travis-ci.org](https://travis-ci.org/walnutgeek/OrangeTree.svg?branch=master)](https://travis-ci.org/walnutgeek/OrangeTree)
+[![appveyor.com](https://ci.appveyor.com/api/projects/status/github/walnutgeek/orangetree?svg=true)](https://ci.appveyor.com/project/walnutgeek/orangetree)
 [![codecov.io](https://codecov.io/github/walnutgeek/OrangeTree/coverage.svg?branch=master)](https://codecov.io/github/walnutgeek/OrangeTree?branch=master)
 [![npm version](https://badge.fury.io/js/OrangeTree.svg)](https://www.npmjs.com/package/OrangeTree)
 [![npm downloads](https://img.shields.io/npm/dm/OrangeTree.svg)](https://npmjs.org/package/OrangeTree)
