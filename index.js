@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 function unescape (s) {
   var new_s = null;
   for( var i = 0 ; i < s.length ; i++ ){
@@ -82,7 +84,7 @@ function Path (s,iterator) {
   }
 }
 
-Object.assign(Path.prototype, {
+_.assign(Path.prototype, {
   is_last: function () {
     return this.next == null;
   },
@@ -247,7 +249,7 @@ var HasCloneMixin = {
 function Container(storage){
   this.storage = storage;
 }
-Object.assign(Container.prototype,{
+_.assign(Container.prototype,{
   getType: function(){
     return is_container(this.storage);
   },
@@ -286,9 +288,9 @@ function Walk(container, path) {
   }
 }
 
-Object.assign( Walk.prototype , Path.prototype );
+_.assign( Walk.prototype , Path.prototype );
 
-Object.assign(Walk.prototype, {
+_.assign(Walk.prototype, {
   value: function () {
     return this.container.get(this);
   }
@@ -300,8 +302,8 @@ function Shadow ( initial ){
   this.children = {} ;
   this.str = '/';
 }
-Object.assign(Shadow.prototype, HasCloneMixin );
-Object.assign(Shadow.prototype, {
+_.assign(Shadow.prototype, HasCloneMixin );
+_.assign(Shadow.prototype, {
       getInitial: function () {
         return this.initial;
       },
@@ -349,8 +351,8 @@ function Tree( parent, key ){
     this.str = '/' + escape(key);
   }
 }
-Object.assign(Tree.prototype, HasCloneMixin );
-Object.assign(Tree.prototype,
+_.assign(Tree.prototype, HasCloneMixin );
+_.assign(Tree.prototype,
     {
       getInitial: function () {
         return this.parent.value()[this.key];

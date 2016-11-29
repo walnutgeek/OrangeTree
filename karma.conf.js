@@ -52,7 +52,12 @@ module.exports = function(config) {
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
@@ -76,7 +81,20 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
 
-    // Concurrency level
+
+        postDetection: function(browsers) {
+          if(process.env.TRAVIS) {
+            var i = browsers.indexOf('Chrome');
+            if (i !== -1) {
+              browsers[i] = 'Chrome_travis_ci';
+            }
+          }
+          return browsers;
+        }
+      },
+
+
+      // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
   })
