@@ -82,15 +82,14 @@ module.exports = function(config) {
     singleRun: true,
 
 
-        postDetection: function(browsers) {
-          if(process.env.TRAVIS) {
-            var i = browsers.indexOf('Chrome');
-            if (i !== -1) {
-              browsers[i] = 'Chrome_travis_ci';
-            }
+    postDetection: function(browsers) {
+        if(process.env.TRAVIS) {
+          var i = browsers.indexOf('Chrome');
+          if (i !== -1) {
+            browsers[i] = 'Chrome_travis_ci';
           }
-          return browsers;
         }
+        return browsers;
       },
 
 
