@@ -63,7 +63,16 @@ module.exports = function(config) {
 
     detectBrowsers: {
       enabled: true,
-      usePhantomJS: false
+      usePhantomJS: false,
+      postDetection: function(browsers) {
+        if(process.env.TRAVIS) {
+          var i = browsers.indexOf('Chrome');
+          if (i !== -1) {
+            browsers[i] = 'Chrome_travis_ci';
+          }
+        }
+        return browsers;
+      },
     },
 
     plugins: [
@@ -82,15 +91,6 @@ module.exports = function(config) {
     singleRun: true,
 
 
-    postDetection: function(browsers) {
-        if(process.env.TRAVIS) {
-          var i = browsers.indexOf('Chrome');
-          if (i !== -1) {
-            browsers[i] = 'Chrome_travis_ci';
-          }
-        }
-        return browsers;
-      },
 
 
       // Concurrency level
