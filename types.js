@@ -87,7 +87,7 @@
      sort index: 0 - for ascending, 1 - for descending, if
      */
     if( +sort_var === 0 || +sort_var === 1)
-      return sort_var;
+      return +sort_var;
     if( _.isBoolean(sort_var) )
       return sort_var ? 1 : 0 ;
     var idx = SORTING.indexOf(sort_var);
@@ -134,18 +134,6 @@
   };
 
 
-//**repeat(n,value)**
-//
-// repeats `value` in array `n` times.  If `value` is function
-// result of `value(i)` call will be stored in array instead.
-
-  u$.repeat=function(n, value) {
-    var result = [];
-    for ( var i = 0; i < n; i++) {
-      result.push(_.isFunction(value) ? value(i) : value);
-    }
-    return result;
-  };
 
 //**convertListToObject(array,extractor) **
 //
@@ -184,24 +172,6 @@
   };
 
 
-//** detectRepeatingChar(s,prefix_ch) **
-//
-// detect repeating char `prefix_ch` in beginning of the line `s`
-  u$.detectRepeatingChar=function(s,prefix_ch){
-    return u$.filterChars(s,function (ch){
-      return ch === prefix_ch;
-    });
-  };
-
-//** detectPrefix ( s, prefix ) **
-//
-// checks if `s` starts with `prefix`. Essentially this is the
-// same as `String.prototype.startWith(prefix)` but ES6 not quite here yet.
-  u$.detectPrefix=function(s,prefix){
-    return prefix.length === u$.filterChars(s,function (ch,at){
-          return ch === prefix.charAt(at);
-        });
-  };
 
 
 //** ensureString ( a ) **
@@ -463,33 +433,6 @@
   };
 
 
-// Collect `sum`, `count`, `min` and `max` for multiple
-// sets of observations. Sets are identified  by `key` and maintainde
-// in `store` object during data collection.
-// ```
-// > store = {}
-// > collect_stats('a', 1, store)
-// > collect_stats('a', 2, store)
-// > collect_stats('b', -1, store)
-// > collect_stats('a', 5, store)
-// > collect_stats('b', 1, store)
-// > store
-// { a: { count: 3, sum: 8, min: 1, max: 5 },
-//   b: { count: 2, sum: 0, min: -1, max: 1 } }
-// > store.a.sum/store.a.count
-// 2.6666666666666665
-// ```
-  u$.collect_stats = function(key, val, store){
-    if( store.hasOwnProperty(key) ){
-      var entry = store[key];
-      entry.count ++;
-      entry.sum += val;
-      if( entry.min > val ) entry.min = val ;
-      if( entry.max < val ) entry.max = val ;
-    }else{
-      store[key] = {count: 1 , sum:val , min: val, max: val};
-    }
-  };
 
 // order functions take two arguments (let's say `a` and `b`)
 // and compare them.
@@ -512,8 +455,7 @@
 
   u$.orderChain = function(){
     /*
-     @param funcs array of functions
-     order functions that need to be chained
+     @arguments list order functions that need to be chained
      @return cumulative order function
      */
     var funcs = Array.prototype.slice.call(arguments);
@@ -574,7 +516,7 @@
         u$.orderPredicateFirst(_.isUndefined),
         u$.orderPredicateFirst(_.isNull),
         u$.orderPredicateFirst(isNaN));
-    return u$.orderChain(funcs);
+    return u$.orderChain.apply(null,funcs);
   };
 
   u$.types = {} ;
@@ -627,7 +569,6 @@
   Type.prototype.init=function(){
     this.to = {};
     this.from = {};
-
   };
   // Link object, associate name with resource location
   //   * `href` - url or path
