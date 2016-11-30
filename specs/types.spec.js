@@ -99,25 +99,27 @@ describe( 'types',function(){
 
   });
 });
-describe( 'types',function(){
-  function smartAssert(expected, result, msg) {
-     if( _.isUndefined(expected) )  {
-        expect( _.isUndefined(result) ).toBe(true, msg);
-    }else if( expected == null )  {
-       expect( result==null ).toBe(true, msg);
-    }else if (expected instanceof t_.Link){
-      expect(expected.href).toBe(result.href, msg + ' e:'+expected.href+ ' r:'+result.href);
-      expect(expected.text).toBe(result.text, msg + ' e:'+expected.href+ ' r:'+result.href);
-    } else if (_.isDate(expected)){
-      var r = result && result.valueOf();
-      var e =expected.valueOf() ;
-      expect(e).toBe(r, msg + ' e:'+e+ ' r:'+r);
-    } else if (isNaN(expected)){
-      expect(isNaN(result)).toBe(true, msg);
-    } else  {
-      expect(result).toBe(expected, msg);
-    }
+
+function smartAssert(expected, result, msg) {
+  if( _.isUndefined(expected) )  {
+    expect( _.isUndefined(result) ).toBe(true, msg);
+  }else if( expected == null )  {
+    expect( result==null ).toBe(true, msg);
+  }else if (expected instanceof t_.Link){
+    expect(expected.href).toBe(result.href, msg + ' e:'+expected.href+ ' r:'+result.href);
+    expect(expected.text).toBe(result.text, msg + ' e:'+expected.href+ ' r:'+result.href);
+  } else if (_.isDate(expected)){
+    var r = result && result.valueOf();
+    var e =expected.valueOf() ;
+    expect(e).toBe(r, msg + ' e:'+e+ ' r:'+r);
+  } else if (isNaN(expected)){
+    expect(isNaN(result)).toBe(true, msg);
+  } else  {
+    expect(result).toBe(expected, msg);
   }
+}
+
+describe( 'types',function(){
     it('Link', function() {
       var s = '[a](b)';
       expect(new t_.Link.parse(s).toString(),s);
@@ -250,7 +252,6 @@ describe( 'types',function(){
       }
 
     });
-  /*
     it('types[*].to_string', function() {
       var cases = {
         string : [ [null , ''], ['a' , 'a'], [ '3' , '3'] ],
@@ -271,30 +272,29 @@ describe( 'types',function(){
           out = t_.types[t].to_string(input);
           expected = cases[t][i][1];
           msg = t+' result:'+out+' expected:'+expected;
-          expect(out, expected, msg );
+          expect(out).toBe( expected, msg );
         }
       }
-
 //    var x = '2015-09-15T17:00:14';
-//    expect(moment(x).format('YYYY-MM-DDTHH:mm:ss'),x);
+//    expect(moment(x).format('YYYY-MM-DDTHH:mm:ss')).toBe(x);
     });
   });
   describe('detect_possible_array_types', function() {
     function matchArrays(a,b){
-      assert.ok(_.isArray(a));
-      assert.ok(_.isArray(b));
-      expect(a.length,b.length);
+      expect(_.isArray(a)).toBe(true);
+      expect(_.isArray(b)).toBe(true);
+      expect(a.length).toBe(b.length);
       for(var i = 0 ; i < a.length ; i++){
         smartAssert( a[i], b[i], JSON.stringify([a[i],b[i]]) );
       }
     }
     function match(a,b,selected){
-      assert.deepEqual(Object.keys(a).sort(),Object.keys(b).sort());
+      expect(Object.keys(a).sort()).toEqual(Object.keys(b).sort());
       Object.keys(a).forEach(function(k){
-        expect(a[k].hasMissing,b[k].hasMissing);
+        expect(a[k].hasMissing).toBe(b[k].hasMissing);
         matchArrays(a[k].array,b[k].array);
       });
-      expect(t_.choose_column_type(b).type.name,selected);
+      expect(t_.choose_column_type(b).type.name).toBe(selected);
     }
 
     describe('has missing', function() {
@@ -304,7 +304,7 @@ describe( 'types',function(){
               string:{ array:['5','0',''],hasMissing:true},
               number:{ array:[5,0,NaN],hasMissing:true},
             },
-            t_.detect_possible_array_types(['5','0',''] ),
+            t_.detect_possible_array_types( ['5','0',''] ),
             'number');
       });
       it('number and boolean', function() {
@@ -342,7 +342,6 @@ describe( 'types',function(){
             'string');
       });
     });
-
     describe('no missing', function() {
       it('number', function() {
         match(  {
@@ -400,7 +399,6 @@ describe( 'types',function(){
             t_.detect_possible_array_types(['1994-10-17','2015'] ),'string');
       });
     });
-  });
   it('types.coerce', function() {
     var cases = {
       string: {
@@ -503,7 +501,7 @@ describe( 'types',function(){
   });
   it('findTypeByValue',function(){
     function test_find(v, typeName) {
-      expect(t_.findTypeByValue(v).name, typeName);
+      expect(t_.findTypeByValue(v).name).toBe( typeName);
     }
     test_find(null, 'string');
     test_find(new Date(Date.UTC(2015,8,15,17,22,42,432)), 'timestamp');
@@ -515,7 +513,8 @@ describe( 'types',function(){
     test_find(false, 'boolean');
     test_find(undefined, 'string');
     test_find(3, 'number');
-  });*/
+  });
+
 });
 
 

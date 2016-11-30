@@ -18,6 +18,17 @@
     return _.isNull(a) || _.isUndefined(a);
   };
 
+  u$.ensurePlainObject = function(o){
+    try{
+      if(_.isString(o)){
+        o = JSON.parse(o);
+      }
+      if(_.isPlainObject(o) || u$.isNullish(o)) {
+        return o;
+      }
+    }catch(ignored){}
+    return undefined;
+  };
 
 // **isPrimitive(a)**
 //
