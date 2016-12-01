@@ -146,43 +146,6 @@
 
 
 
-//**convertListToObject(array,extractor) **
-//
-// converts array to object.  `extractor(v)` retrieve key  from each
-// element of array. If key is defined key-value pair will be stored
-// in object.
-  u$.convertListToObject=function(array,extractor) {
-    var obj = {};
-    for ( var i = 0; i < array.length; i++) {
-      var v = array[i];
-      var k = extractor(v);
-      if( k !== undefined ){
-        obj[k] = v;
-      }
-    }
-    return obj;
-  };
-
-
-
-// ## Misc
-
-//** filterChars(s,filter) **
-//
-// starting from beginning filter all characters
-// that meet `filter(char(string),index(int),whole_string(string))->boolean`
-// function requirements.
-//
-// Returns position where criteria no longer met.
-  u$.filterChars=function(s,filter){
-    var at = 0 ;
-    while( at < s.length && filter(s.charAt(at),at,s) ) {
-      at++;
-    }
-    return at;
-  };
-
-
 
 
 //** ensureString ( a ) **
